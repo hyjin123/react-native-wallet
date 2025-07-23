@@ -3,12 +3,14 @@
 import express from 'express';
 import dotenv from "dotenv";
 import { sql } from "./config/db.js";
+import rateLimiter from './middleware/rateLimiter.js';
 
 dotenv.config();
 
 const app = express();
 
 // middleware is just a function that sits between the request and response of an application. It can access, modify, handle and pass along that request
+app.use(rateLimiter);
 app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
